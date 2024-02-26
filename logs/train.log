@@ -1,0 +1,1031 @@
+nohup: ignoring input
++ set -e
++ TASK=humans_wikidata_ind
++ [[ 0 -ge 1 ]]
++++ dirname ./scripts/train_hw.sh
+++ cd ./scripts
+++ cd ..
+++ pwd
++ DIR=/home/lrl23/PReSA
++ echo 'working directory: /home/lrl23/PReSA'
+working directory: /home/lrl23/PReSA
++ '[' -z '' ']'
+++ date +%F-%H%M.%S
++ OUTPUT_DIR=/home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47
++ '[' -z '' ']'
++ DATA_DIR=/home/lrl23/PReSA/data/humans_wikidata_ind
++ python3 -u main.py --model-dir /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47 --pretrained-model bert-base-uncased --pooling mean --lr 3e-5 --use-link-graph --train-path /home/lrl23/PReSA/data/humans_wikidata_ind/train.txt.json --valid-path /home/lrl23/PReSA/data/humans_wikidata_ind/valid.txt.json --task humans_wikidata_ind --batch-size 500 --print-freq 100 --addictive-margin 0.02 --finetune-t --pre-batch 0 --epochs 30 --workers 4 --max-to-keep 5
+[2024-02-25 14:52:49,466 INFO] Load 37262 entities from /home/lrl23/PReSA/data/humans_wikidata_ind/entities.json
+[2024-02-25 14:52:49,466 INFO] Triplets path: ['/home/lrl23/PReSA/data/humans_wikidata_ind/train.txt.json']
+[2024-02-25 14:52:49,922 INFO] Triplet statistics: 430 relations, 202390 triplets
+[2024-02-25 14:52:49,922 INFO] Start to build link graph from /home/lrl23/PReSA/data/humans_wikidata_ind/train.txt.json
+[2024-02-25 14:52:50,062 INFO] Done build link graph with 36193 nodes
+[2024-02-25 14:52:50,139 INFO] Use 4 gpus for training
+[2024-02-25 14:52:50,174 INFO] Build tokenizer from bert-base-uncased
+[2024-02-25 14:52:50,174 INFO] => creating model
+[2024-02-25 14:52:51,753 INFO] CustomBertModel(
+  (head_encoder): BertModel(
+    (embeddings): BertEmbeddings(
+      (word_embeddings): Embedding(30522, 768, padding_idx=0)
+      (position_embeddings): Embedding(512, 768)
+      (token_type_embeddings): Embedding(2, 768)
+      (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (encoder): BertEncoder(
+      (layer): ModuleList(
+        (0-11): 12 x BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+            (intermediate_act_fn): GELUActivation()
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+    (pooler): BertPooler(
+      (dense): Linear(in_features=768, out_features=768, bias=True)
+      (activation): Tanh()
+    )
+  )
+  (schema_encoder): BertModel(
+    (embeddings): BertEmbeddings(
+      (word_embeddings): Embedding(30522, 768, padding_idx=0)
+      (position_embeddings): Embedding(512, 768)
+      (token_type_embeddings): Embedding(2, 768)
+      (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (encoder): BertEncoder(
+      (layer): ModuleList(
+        (0-11): 12 x BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+            (intermediate_act_fn): GELUActivation()
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+    (pooler): BertPooler(
+      (dense): Linear(in_features=768, out_features=768, bias=True)
+      (activation): Tanh()
+    )
+  )
+  (tail_encoder): BertModel(
+    (embeddings): BertEmbeddings(
+      (word_embeddings): Embedding(30522, 768, padding_idx=0)
+      (position_embeddings): Embedding(512, 768)
+      (token_type_embeddings): Embedding(2, 768)
+      (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (encoder): BertEncoder(
+      (layer): ModuleList(
+        (0-11): 12 x BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+            (intermediate_act_fn): GELUActivation()
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+    (pooler): BertPooler(
+      (dense): Linear(in_features=768, out_features=768, bias=True)
+      (activation): Tanh()
+    )
+  )
+  (linear): Linear(in_features=3072, out_features=768, bias=True)
+  (relu): LeakyReLU(negative_slope=0.01)
+)
+/home/lrl23/miniconda3/envs/ms-sft/lib/python3.10/site-packages/transformers/optimization.py:429: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+[2024-02-25 14:52:51,982 INFO] module.log_inv_t: 1.0
+[2024-02-25 14:52:51,982 INFO] module.head_encoder.embeddings.word_embeddings.weight: 23440896
+[2024-02-25 14:52:51,982 INFO] module.head_encoder.embeddings.position_embeddings.weight: 393216
+[2024-02-25 14:52:51,982 INFO] module.head_encoder.embeddings.token_type_embeddings.weight: 1536
+[2024-02-25 14:52:51,982 INFO] module.head_encoder.embeddings.LayerNorm.weight: 768
+[2024-02-25 14:52:51,982 INFO] module.head_encoder.embeddings.LayerNorm.bias: 768
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.0.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.0.attention.self.query.bias: 768
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.0.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.0.attention.self.key.bias: 768
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.0.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.0.attention.self.value.bias: 768
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.0.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.0.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.0.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.0.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.0.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.0.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.0.output.dense.weight: 2359296
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.0.output.dense.bias: 768
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.0.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.0.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.1.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.1.attention.self.query.bias: 768
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.1.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.1.attention.self.key.bias: 768
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.1.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.1.attention.self.value.bias: 768
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.1.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.1.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,983 INFO] module.head_encoder.encoder.layer.1.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.1.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.1.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.1.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.1.output.dense.weight: 2359296
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.1.output.dense.bias: 768
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.1.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.1.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.2.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.2.attention.self.query.bias: 768
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.2.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.2.attention.self.key.bias: 768
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.2.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.2.attention.self.value.bias: 768
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.2.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.2.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.2.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.2.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.2.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.2.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.2.output.dense.weight: 2359296
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.2.output.dense.bias: 768
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.2.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.2.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.3.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.3.attention.self.query.bias: 768
+[2024-02-25 14:52:51,984 INFO] module.head_encoder.encoder.layer.3.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.3.attention.self.key.bias: 768
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.3.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.3.attention.self.value.bias: 768
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.3.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.3.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.3.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.3.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.3.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.3.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.3.output.dense.weight: 2359296
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.3.output.dense.bias: 768
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.3.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.3.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.4.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.4.attention.self.query.bias: 768
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.4.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.4.attention.self.key.bias: 768
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.4.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.4.attention.self.value.bias: 768
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.4.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.4.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.4.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.4.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.4.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.4.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.4.output.dense.weight: 2359296
+[2024-02-25 14:52:51,985 INFO] module.head_encoder.encoder.layer.4.output.dense.bias: 768
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.4.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.4.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.5.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.5.attention.self.query.bias: 768
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.5.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.5.attention.self.key.bias: 768
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.5.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.5.attention.self.value.bias: 768
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.5.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.5.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.5.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.5.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.5.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.5.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.5.output.dense.weight: 2359296
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.5.output.dense.bias: 768
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.5.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.5.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.6.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.6.attention.self.query.bias: 768
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.6.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.6.attention.self.key.bias: 768
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.6.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.6.attention.self.value.bias: 768
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.6.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.6.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,986 INFO] module.head_encoder.encoder.layer.6.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.6.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.6.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.6.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.6.output.dense.weight: 2359296
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.6.output.dense.bias: 768
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.6.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.6.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.7.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.7.attention.self.query.bias: 768
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.7.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.7.attention.self.key.bias: 768
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.7.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.7.attention.self.value.bias: 768
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.7.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.7.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.7.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.7.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.7.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.7.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.7.output.dense.weight: 2359296
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.7.output.dense.bias: 768
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.7.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.7.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.8.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.8.attention.self.query.bias: 768
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.8.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,987 INFO] module.head_encoder.encoder.layer.8.attention.self.key.bias: 768
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.8.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.8.attention.self.value.bias: 768
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.8.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.8.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.8.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.8.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.8.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.8.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.8.output.dense.weight: 2359296
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.8.output.dense.bias: 768
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.8.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.8.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.9.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.9.attention.self.query.bias: 768
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.9.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.9.attention.self.key.bias: 768
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.9.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.9.attention.self.value.bias: 768
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.9.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.9.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.9.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.9.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.9.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.9.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.9.output.dense.weight: 2359296
+[2024-02-25 14:52:51,988 INFO] module.head_encoder.encoder.layer.9.output.dense.bias: 768
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.9.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.9.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.10.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.10.attention.self.query.bias: 768
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.10.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.10.attention.self.key.bias: 768
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.10.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.10.attention.self.value.bias: 768
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.10.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.10.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.10.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.10.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.10.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.10.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.10.output.dense.weight: 2359296
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.10.output.dense.bias: 768
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.10.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.10.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.11.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.11.attention.self.query.bias: 768
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.11.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.11.attention.self.key.bias: 768
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.11.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.11.attention.self.value.bias: 768
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.11.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.11.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,989 INFO] module.head_encoder.encoder.layer.11.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,990 INFO] module.head_encoder.encoder.layer.11.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,990 INFO] module.head_encoder.encoder.layer.11.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,990 INFO] module.head_encoder.encoder.layer.11.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,990 INFO] module.head_encoder.encoder.layer.11.output.dense.weight: 2359296
+[2024-02-25 14:52:51,990 INFO] module.head_encoder.encoder.layer.11.output.dense.bias: 768
+[2024-02-25 14:52:51,990 INFO] module.head_encoder.encoder.layer.11.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,990 INFO] module.head_encoder.encoder.layer.11.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,990 INFO] module.head_encoder.pooler.dense.weight: 589824
+[2024-02-25 14:52:51,990 INFO] module.head_encoder.pooler.dense.bias: 768
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.embeddings.word_embeddings.weight: 23440896
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.embeddings.position_embeddings.weight: 393216
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.embeddings.token_type_embeddings.weight: 1536
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.embeddings.LayerNorm.weight: 768
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.embeddings.LayerNorm.bias: 768
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.encoder.layer.0.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.encoder.layer.0.attention.self.query.bias: 768
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.encoder.layer.0.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.encoder.layer.0.attention.self.key.bias: 768
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.encoder.layer.0.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.encoder.layer.0.attention.self.value.bias: 768
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.encoder.layer.0.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.encoder.layer.0.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.encoder.layer.0.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.encoder.layer.0.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.encoder.layer.0.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.encoder.layer.0.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,990 INFO] module.schema_encoder.encoder.layer.0.output.dense.weight: 2359296
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.0.output.dense.bias: 768
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.0.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.0.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.1.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.1.attention.self.query.bias: 768
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.1.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.1.attention.self.key.bias: 768
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.1.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.1.attention.self.value.bias: 768
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.1.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.1.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.1.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.1.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.1.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.1.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.1.output.dense.weight: 2359296
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.1.output.dense.bias: 768
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.1.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.1.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.2.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.2.attention.self.query.bias: 768
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.2.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.2.attention.self.key.bias: 768
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.2.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.2.attention.self.value.bias: 768
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.2.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,991 INFO] module.schema_encoder.encoder.layer.2.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.2.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.2.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.2.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.2.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.2.output.dense.weight: 2359296
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.2.output.dense.bias: 768
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.2.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.2.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.3.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.3.attention.self.query.bias: 768
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.3.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.3.attention.self.key.bias: 768
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.3.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.3.attention.self.value.bias: 768
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.3.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.3.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.3.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.3.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.3.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.3.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.3.output.dense.weight: 2359296
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.3.output.dense.bias: 768
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.3.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.3.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.4.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.4.attention.self.query.bias: 768
+[2024-02-25 14:52:51,992 INFO] module.schema_encoder.encoder.layer.4.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.4.attention.self.key.bias: 768
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.4.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.4.attention.self.value.bias: 768
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.4.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.4.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.4.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.4.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.4.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.4.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.4.output.dense.weight: 2359296
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.4.output.dense.bias: 768
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.4.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.4.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.5.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.5.attention.self.query.bias: 768
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.5.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.5.attention.self.key.bias: 768
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.5.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.5.attention.self.value.bias: 768
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.5.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.5.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.5.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.5.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.5.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.5.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.5.output.dense.weight: 2359296
+[2024-02-25 14:52:51,993 INFO] module.schema_encoder.encoder.layer.5.output.dense.bias: 768
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.5.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.5.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.6.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.6.attention.self.query.bias: 768
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.6.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.6.attention.self.key.bias: 768
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.6.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.6.attention.self.value.bias: 768
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.6.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.6.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.6.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.6.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.6.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.6.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.6.output.dense.weight: 2359296
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.6.output.dense.bias: 768
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.6.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.6.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.7.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.7.attention.self.query.bias: 768
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.7.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.7.attention.self.key.bias: 768
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.7.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.7.attention.self.value.bias: 768
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.7.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.7.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,994 INFO] module.schema_encoder.encoder.layer.7.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.7.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.7.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.7.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.7.output.dense.weight: 2359296
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.7.output.dense.bias: 768
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.7.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.7.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.8.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.8.attention.self.query.bias: 768
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.8.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.8.attention.self.key.bias: 768
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.8.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.8.attention.self.value.bias: 768
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.8.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.8.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.8.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.8.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.8.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.8.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.8.output.dense.weight: 2359296
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.8.output.dense.bias: 768
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.8.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.8.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.9.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.9.attention.self.query.bias: 768
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.9.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,995 INFO] module.schema_encoder.encoder.layer.9.attention.self.key.bias: 768
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.9.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.9.attention.self.value.bias: 768
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.9.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.9.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.9.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.9.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.9.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.9.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.9.output.dense.weight: 2359296
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.9.output.dense.bias: 768
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.9.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.9.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.10.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.10.attention.self.query.bias: 768
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.10.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.10.attention.self.key.bias: 768
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.10.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.10.attention.self.value.bias: 768
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.10.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.10.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.10.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.10.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.10.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.10.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.10.output.dense.weight: 2359296
+[2024-02-25 14:52:51,996 INFO] module.schema_encoder.encoder.layer.10.output.dense.bias: 768
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.10.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.10.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.11.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.11.attention.self.query.bias: 768
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.11.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.11.attention.self.key.bias: 768
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.11.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.11.attention.self.value.bias: 768
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.11.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.11.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.11.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.11.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.11.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.11.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.11.output.dense.weight: 2359296
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.11.output.dense.bias: 768
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.11.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.encoder.layer.11.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.pooler.dense.weight: 589824
+[2024-02-25 14:52:51,997 INFO] module.schema_encoder.pooler.dense.bias: 768
+[2024-02-25 14:52:51,997 INFO] module.tail_encoder.embeddings.word_embeddings.weight: 23440896
+[2024-02-25 14:52:51,997 INFO] module.tail_encoder.embeddings.position_embeddings.weight: 393216
+[2024-02-25 14:52:51,997 INFO] module.tail_encoder.embeddings.token_type_embeddings.weight: 1536
+[2024-02-25 14:52:51,997 INFO] module.tail_encoder.embeddings.LayerNorm.weight: 768
+[2024-02-25 14:52:51,997 INFO] module.tail_encoder.embeddings.LayerNorm.bias: 768
+[2024-02-25 14:52:51,997 INFO] module.tail_encoder.encoder.layer.0.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,997 INFO] module.tail_encoder.encoder.layer.0.attention.self.query.bias: 768
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.0.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.0.attention.self.key.bias: 768
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.0.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.0.attention.self.value.bias: 768
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.0.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.0.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.0.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.0.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.0.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.0.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.0.output.dense.weight: 2359296
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.0.output.dense.bias: 768
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.0.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.0.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.1.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.1.attention.self.query.bias: 768
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.1.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.1.attention.self.key.bias: 768
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.1.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.1.attention.self.value.bias: 768
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.1.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.1.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.1.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.1.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.1.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,998 INFO] module.tail_encoder.encoder.layer.1.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.1.output.dense.weight: 2359296
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.1.output.dense.bias: 768
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.1.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.1.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.2.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.2.attention.self.query.bias: 768
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.2.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.2.attention.self.key.bias: 768
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.2.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.2.attention.self.value.bias: 768
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.2.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.2.attention.output.dense.bias: 768
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.2.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.2.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.2.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.2.intermediate.dense.bias: 3072
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.2.output.dense.weight: 2359296
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.2.output.dense.bias: 768
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.2.output.LayerNorm.weight: 768
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.2.output.LayerNorm.bias: 768
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.3.attention.self.query.weight: 589824
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.3.attention.self.query.bias: 768
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.3.attention.self.key.weight: 589824
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.3.attention.self.key.bias: 768
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.3.attention.self.value.weight: 589824
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.3.attention.self.value.bias: 768
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.3.attention.output.dense.weight: 589824
+[2024-02-25 14:52:51,999 INFO] module.tail_encoder.encoder.layer.3.attention.output.dense.bias: 768
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.3.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.3.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.3.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.3.intermediate.dense.bias: 3072
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.3.output.dense.weight: 2359296
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.3.output.dense.bias: 768
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.3.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.3.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.4.attention.self.query.weight: 589824
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.4.attention.self.query.bias: 768
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.4.attention.self.key.weight: 589824
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.4.attention.self.key.bias: 768
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.4.attention.self.value.weight: 589824
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.4.attention.self.value.bias: 768
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.4.attention.output.dense.weight: 589824
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.4.attention.output.dense.bias: 768
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.4.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.4.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.4.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.4.intermediate.dense.bias: 3072
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.4.output.dense.weight: 2359296
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.4.output.dense.bias: 768
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.4.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.4.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.5.attention.self.query.weight: 589824
+[2024-02-25 14:52:52,000 INFO] module.tail_encoder.encoder.layer.5.attention.self.query.bias: 768
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.5.attention.self.key.weight: 589824
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.5.attention.self.key.bias: 768
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.5.attention.self.value.weight: 589824
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.5.attention.self.value.bias: 768
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.5.attention.output.dense.weight: 589824
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.5.attention.output.dense.bias: 768
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.5.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.5.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.5.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.5.intermediate.dense.bias: 3072
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.5.output.dense.weight: 2359296
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.5.output.dense.bias: 768
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.5.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.5.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.6.attention.self.query.weight: 589824
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.6.attention.self.query.bias: 768
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.6.attention.self.key.weight: 589824
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.6.attention.self.key.bias: 768
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.6.attention.self.value.weight: 589824
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.6.attention.self.value.bias: 768
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.6.attention.output.dense.weight: 589824
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.6.attention.output.dense.bias: 768
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.6.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.6.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.6.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.6.intermediate.dense.bias: 3072
+[2024-02-25 14:52:52,001 INFO] module.tail_encoder.encoder.layer.6.output.dense.weight: 2359296
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.6.output.dense.bias: 768
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.6.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.6.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.7.attention.self.query.weight: 589824
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.7.attention.self.query.bias: 768
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.7.attention.self.key.weight: 589824
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.7.attention.self.key.bias: 768
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.7.attention.self.value.weight: 589824
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.7.attention.self.value.bias: 768
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.7.attention.output.dense.weight: 589824
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.7.attention.output.dense.bias: 768
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.7.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.7.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.7.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.7.intermediate.dense.bias: 3072
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.7.output.dense.weight: 2359296
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.7.output.dense.bias: 768
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.7.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.7.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.8.attention.self.query.weight: 589824
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.8.attention.self.query.bias: 768
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.8.attention.self.key.weight: 589824
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.8.attention.self.key.bias: 768
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.8.attention.self.value.weight: 589824
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.8.attention.self.value.bias: 768
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.8.attention.output.dense.weight: 589824
+[2024-02-25 14:52:52,002 INFO] module.tail_encoder.encoder.layer.8.attention.output.dense.bias: 768
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.8.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.8.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.8.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.8.intermediate.dense.bias: 3072
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.8.output.dense.weight: 2359296
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.8.output.dense.bias: 768
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.8.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.8.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.9.attention.self.query.weight: 589824
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.9.attention.self.query.bias: 768
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.9.attention.self.key.weight: 589824
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.9.attention.self.key.bias: 768
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.9.attention.self.value.weight: 589824
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.9.attention.self.value.bias: 768
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.9.attention.output.dense.weight: 589824
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.9.attention.output.dense.bias: 768
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.9.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.9.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.9.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.9.intermediate.dense.bias: 3072
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.9.output.dense.weight: 2359296
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.9.output.dense.bias: 768
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.9.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.9.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.10.attention.self.query.weight: 589824
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.10.attention.self.query.bias: 768
+[2024-02-25 14:52:52,003 INFO] module.tail_encoder.encoder.layer.10.attention.self.key.weight: 589824
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.10.attention.self.key.bias: 768
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.10.attention.self.value.weight: 589824
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.10.attention.self.value.bias: 768
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.10.attention.output.dense.weight: 589824
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.10.attention.output.dense.bias: 768
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.10.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.10.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.10.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.10.intermediate.dense.bias: 3072
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.10.output.dense.weight: 2359296
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.10.output.dense.bias: 768
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.10.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.10.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.11.attention.self.query.weight: 589824
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.11.attention.self.query.bias: 768
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.11.attention.self.key.weight: 589824
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.11.attention.self.key.bias: 768
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.11.attention.self.value.weight: 589824
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.11.attention.self.value.bias: 768
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.11.attention.output.dense.weight: 589824
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.11.attention.output.dense.bias: 768
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.11.attention.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.11.attention.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.11.intermediate.dense.weight: 2359296
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.11.intermediate.dense.bias: 3072
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.11.output.dense.weight: 2359296
+[2024-02-25 14:52:52,004 INFO] module.tail_encoder.encoder.layer.11.output.dense.bias: 768
+[2024-02-25 14:52:52,005 INFO] module.tail_encoder.encoder.layer.11.output.LayerNorm.weight: 768
+[2024-02-25 14:52:52,005 INFO] module.tail_encoder.encoder.layer.11.output.LayerNorm.bias: 768
+[2024-02-25 14:52:52,005 INFO] module.tail_encoder.pooler.dense.weight: 589824
+[2024-02-25 14:52:52,005 INFO] module.tail_encoder.pooler.dense.bias: 768
+[2024-02-25 14:52:52,005 INFO] module.linear.weight: 2359296
+[2024-02-25 14:52:52,005 INFO] module.linear.bias: 768
+[2024-02-25 14:52:52,005 INFO] Number of parameters: 330.0M
+[2024-02-25 14:52:52,005 INFO] In test mode: False
+[2024-02-25 14:52:52,086 INFO] Load 101195 examples from /home/lrl23/PReSA/data/humans_wikidata_ind/train.txt.json
+[2024-02-25 14:52:52,511 INFO] In test mode: False
+[2024-02-25 14:52:52,513 INFO] Load 1705 examples from /home/lrl23/PReSA/data/humans_wikidata_ind/valid.txt.json
+[2024-02-25 14:52:52,516 INFO] Total training steps: 12143, warmup steps: 400
+[2024-02-25 14:52:52,516 INFO] Args={
+    "pretrained_model": "bert-base-uncased",
+    "task": "humans_wikidata_ind",
+    "train_path": "/home/lrl23/PReSA/data/humans_wikidata_ind/train.txt.json",
+    "valid_path": "/home/lrl23/PReSA/data/humans_wikidata_ind/valid.txt.json",
+    "model_dir": "/home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47",
+    "warmup": 400,
+    "max_to_keep": 5,
+    "grad_clip": 10.0,
+    "pooling": "mean",
+    "dropout": 0.1,
+    "use_amp": false,
+    "t": 0.05,
+    "use_link_graph": true,
+    "eval_every_n_step": 10000,
+    "add_negatives": false,
+    "select_rank": 2,
+    "pre_batch": 0,
+    "pre_batch_weight": 0.5,
+    "addictive_margin": 0.02,
+    "finetune_t": true,
+    "max_num_tokens": 50,
+    "use_self_negative": false,
+    "workers": 4,
+    "epochs": 30,
+    "batch_size": 500,
+    "lr": 3e-05,
+    "lr_scheduler": "linear",
+    "weight_decay": 0.0001,
+    "print_freq": 100,
+    "seed": null,
+    "is_test": false,
+    "rerank_n_hop": 2,
+    "neighbor_weight": 0.0,
+    "eval_model_path": ""
+}
+[2024-02-25 14:52:56,985 INFO] Epoch: [0][  0/404]	Loss 13.24 (13.24)	InvT  20.00 ( 20.00)	Acc@1   0.00 (  0.00)	Acc@3   0.00 (  0.00)
+[2024-02-25 14:54:18,879 INFO] Epoch: [0][100/404]	Loss 7.528 (11.18)	InvT  20.00 ( 20.00)	Acc@1  17.20 (  4.80)	Acc@3  32.00 (  8.34)
+[2024-02-25 14:55:40,801 INFO] Epoch: [0][200/404]	Loss 4.74 (8.411)	InvT  20.03 ( 20.01)	Acc@1  36.00 ( 17.49)	Acc@3  54.20 ( 28.01)
+[2024-02-25 14:57:02,757 INFO] Epoch: [0][300/404]	Loss 3.775 (6.954)	InvT  20.04 ( 20.02)	Acc@1  44.40 ( 26.55)	Acc@3  64.60 ( 40.02)
+[2024-02-25 14:58:24,999 INFO] Epoch: [0][400/404]	Loss 3.421 (6.089)	InvT  20.05 ( 20.02)	Acc@1  53.60 ( 32.59)	Acc@3  72.60 ( 47.47)
+[2024-02-25 14:58:27,530 INFO] Learning rate: 2.9989781146214766e-05
+[2024-02-25 14:58:30,188 INFO] Epoch 0, valid metric: {"Acc@1": 36.774, "Acc@3": 47.214, "loss": 3.704}
+[2024-02-25 14:58:33,852 INFO] Epoch: [1][  0/404]	Loss 3.285 (3.285)	InvT  20.05 ( 20.05)	Acc@1  52.80 ( 52.80)	Acc@3  72.40 ( 72.40)
+[2024-02-25 14:59:55,908 INFO] Epoch: [1][100/404]	Loss 2.831 (3.017)	InvT  20.05 ( 20.05)	Acc@1  59.40 ( 56.30)	Acc@3  75.60 ( 75.08)
+[2024-02-25 15:01:18,086 INFO] Epoch: [1][200/404]	Loss 2.846 (2.943)	InvT  20.05 ( 20.05)	Acc@1  60.60 ( 57.62)	Acc@3  78.20 ( 75.88)
+[2024-02-25 15:02:40,137 INFO] Epoch: [1][300/404]	Loss 2.434 (2.87)	InvT  20.04 ( 20.05)	Acc@1  62.80 ( 58.68)	Acc@3  81.60 ( 76.54)
+[2024-02-25 15:04:02,024 INFO] Epoch: [1][400/404]	Loss 2.318 (2.808)	InvT  20.03 ( 20.05)	Acc@1  64.80 ( 59.60)	Acc@3  81.40 ( 77.09)
+[2024-02-25 15:04:04,628 INFO] Learning rate: 2.8957676913906158e-05
+[2024-02-25 15:04:07,413 INFO] Epoch 1, valid metric: {"Acc@1": 40.997, "Acc@3": 51.877, "loss": 3.349}
+[2024-02-25 15:04:12,547 INFO] Epoch: [2][  0/404]	Loss 2.162 (2.162)	InvT  20.03 ( 20.03)	Acc@1  66.60 ( 66.60)	Acc@3  82.40 ( 82.40)
+[2024-02-25 15:05:34,536 INFO] Epoch: [2][100/404]	Loss 1.948 (2.288)	InvT  20.03 ( 20.03)	Acc@1  69.40 ( 66.38)	Acc@3  86.80 ( 81.87)
+[2024-02-25 15:06:56,675 INFO] Epoch: [2][200/404]	Loss 1.982 (2.285)	InvT  20.02 ( 20.03)	Acc@1  70.80 ( 66.34)	Acc@3  84.40 ( 81.69)
+[2024-02-25 15:08:18,398 INFO] Epoch: [2][300/404]	Loss 2.419 (2.264)	InvT  20.00 ( 20.02)	Acc@1  67.20 ( 66.61)	Acc@3  80.20 ( 81.87)
+[2024-02-25 15:09:40,701 INFO] Epoch: [2][400/404]	Loss 2.095 (2.243)	InvT  19.98 ( 20.01)	Acc@1  69.80 ( 66.98)	Acc@3  82.00 ( 82.15)
+[2024-02-25 15:09:43,263 INFO] Learning rate: 2.792557268159755e-05
+[2024-02-25 15:09:45,948 INFO] Epoch 2, valid metric: {"Acc@1": 40.147, "Acc@3": 50.909, "loss": 3.372}
+[2024-02-25 15:09:49,931 INFO] Epoch: [3][  0/404]	Loss 2.0 (2.0)	InvT  19.98 ( 19.98)	Acc@1  71.60 ( 71.60)	Acc@3  85.00 ( 85.00)
+[2024-02-25 15:11:11,917 INFO] Epoch: [3][100/404]	Loss 2.016 (1.916)	InvT  19.98 ( 19.98)	Acc@1  67.80 ( 70.69)	Acc@3  84.20 ( 85.09)
+[2024-02-25 15:12:33,837 INFO] Epoch: [3][200/404]	Loss 1.938 (1.918)	InvT  19.97 ( 19.98)	Acc@1  72.20 ( 70.83)	Acc@3  86.60 ( 85.14)
+[2024-02-25 15:13:55,927 INFO] Epoch: [3][300/404]	Loss 1.897 (1.924)	InvT  19.95 ( 19.97)	Acc@1  72.60 ( 70.78)	Acc@3  84.80 ( 85.14)
+[2024-02-25 15:15:17,997 INFO] Epoch: [3][400/404]	Loss 1.927 (1.918)	InvT  19.93 ( 19.97)	Acc@1  69.40 ( 70.91)	Acc@3  85.80 ( 85.21)
+[2024-02-25 15:15:20,611 INFO] Learning rate: 2.689346844928894e-05
+[2024-02-25 15:15:23,362 INFO] Epoch 3, valid metric: {"Acc@1": 39.238, "Acc@3": 50.674, "loss": 3.5}
+[2024-02-25 15:15:27,349 INFO] Epoch: [4][  0/404]	Loss 1.91 (1.91)	InvT  19.93 ( 19.93)	Acc@1  70.00 ( 70.00)	Acc@3  86.40 ( 86.40)
+[2024-02-25 15:16:49,575 INFO] Epoch: [4][100/404]	Loss 1.586 (1.668)	InvT  19.93 ( 19.93)	Acc@1  74.60 ( 73.79)	Acc@3  88.20 ( 87.67)
+[2024-02-25 15:18:11,719 INFO] Epoch: [4][200/404]	Loss 1.701 (1.691)	InvT  19.92 ( 19.93)	Acc@1  76.00 ( 73.60)	Acc@3  88.80 ( 87.45)
+[2024-02-25 15:19:34,126 INFO] Epoch: [4][300/404]	Loss 1.77 (1.686)	InvT  19.91 ( 19.93)	Acc@1  74.20 ( 73.76)	Acc@3  87.40 ( 87.44)
+[2024-02-25 15:20:56,448 INFO] Epoch: [4][400/404]	Loss 1.833 (1.685)	InvT  19.89 ( 19.92)	Acc@1  73.80 ( 73.81)	Acc@3  86.40 ( 87.47)
+[2024-02-25 15:20:59,014 INFO] Learning rate: 2.5861364216980328e-05
+[2024-02-25 15:21:01,769 INFO] Epoch 4, valid metric: {"Acc@1": 38.622, "Acc@3": 50.762, "loss": 3.657}
+[2024-02-25 15:21:05,602 INFO] Epoch: [5][  0/404]	Loss 1.316 (1.316)	InvT  19.89 ( 19.89)	Acc@1  77.00 ( 77.00)	Acc@3  92.20 ( 92.20)
+[2024-02-25 15:22:27,542 INFO] Epoch: [5][100/404]	Loss 1.424 (1.462)	InvT  19.90 ( 19.89)	Acc@1  76.80 ( 76.70)	Acc@3  89.60 ( 89.65)
+[2024-02-25 15:23:49,728 INFO] Epoch: [5][200/404]	Loss 1.66 (1.471)	InvT  19.89 ( 19.89)	Acc@1  74.60 ( 76.51)	Acc@3  88.40 ( 89.56)
+[2024-02-25 15:25:11,748 INFO] Epoch: [5][300/404]	Loss 1.48 (1.479)	InvT  19.88 ( 19.89)	Acc@1  77.60 ( 76.38)	Acc@3  89.40 ( 89.41)
+[2024-02-25 15:26:33,914 INFO] Epoch: [5][400/404]	Loss 1.47 (1.486)	InvT  19.86 ( 19.89)	Acc@1  74.80 ( 76.36)	Acc@3  88.40 ( 89.34)
+[2024-02-25 15:26:36,490 INFO] Learning rate: 2.482925998467172e-05
+[2024-02-25 15:26:39,261 INFO] Epoch 5, valid metric: {"Acc@1": 39.824, "Acc@3": 51.554, "loss": 3.672}
+[2024-02-25 15:26:41,510 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch0.mdl
+[2024-02-25 15:26:43,264 INFO] Epoch: [6][  0/404]	Loss 1.155 (1.155)	InvT  19.86 ( 19.86)	Acc@1  80.60 ( 80.60)	Acc@3  92.20 ( 92.20)
+[2024-02-25 15:28:05,264 INFO] Epoch: [6][100/404]	Loss 1.387 (1.301)	InvT  19.87 ( 19.87)	Acc@1  79.40 ( 78.87)	Acc@3  91.80 ( 91.10)
+[2024-02-25 15:29:27,188 INFO] Epoch: [6][200/404]	Loss 1.162 (1.312)	InvT  19.87 ( 19.87)	Acc@1  79.40 ( 78.77)	Acc@3  91.60 ( 91.08)
+[2024-02-25 15:30:49,371 INFO] Epoch: [6][300/404]	Loss 1.264 (1.316)	InvT  19.87 ( 19.87)	Acc@1  79.40 ( 78.76)	Acc@3  92.40 ( 91.06)
+[2024-02-25 15:32:11,642 INFO] Epoch: [6][400/404]	Loss 1.263 (1.321)	InvT  19.85 ( 19.87)	Acc@1  80.80 ( 78.67)	Acc@3  91.40 ( 91.02)
+[2024-02-25 15:32:14,258 INFO] Learning rate: 2.379715575236311e-05
+[2024-02-25 15:32:17,016 INFO] Epoch 6, valid metric: {"Acc@1": 38.71, "Acc@3": 50.205, "loss": 3.802}
+[2024-02-25 15:32:19,376 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch1.mdl
+[2024-02-25 15:32:21,230 INFO] Epoch: [7][  0/404]	Loss 1.116 (1.116)	InvT  19.85 ( 19.85)	Acc@1  81.20 ( 81.20)	Acc@3  93.20 ( 93.20)
+[2024-02-25 15:33:43,108 INFO] Epoch: [7][100/404]	Loss 1.337 (1.149)	InvT  19.87 ( 19.86)	Acc@1  78.60 ( 81.03)	Acc@3  90.80 ( 92.75)
+[2024-02-25 15:35:05,301 INFO] Epoch: [7][200/404]	Loss 1.114 (1.15)	InvT  19.88 ( 19.87)	Acc@1  82.20 ( 81.12)	Acc@3  93.20 ( 92.79)
+[2024-02-25 15:36:27,254 INFO] Epoch: [7][300/404]	Loss 1.111 (1.169)	InvT  19.88 ( 19.87)	Acc@1  83.40 ( 80.82)	Acc@3  93.40 ( 92.62)
+[2024-02-25 15:37:49,381 INFO] Epoch: [7][400/404]	Loss 1.254 (1.179)	InvT  19.87 ( 19.87)	Acc@1  78.40 ( 80.66)	Acc@3  92.00 ( 92.51)
+[2024-02-25 15:37:51,962 INFO] Learning rate: 2.2765051520054502e-05
+[2024-02-25 15:37:54,935 INFO] Epoch 7, valid metric: {"Acc@1": 38.856, "Acc@3": 50.88, "loss": 3.9}
+[2024-02-25 15:37:57,308 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch2.mdl
+[2024-02-25 15:37:59,115 INFO] Epoch: [8][  0/404]	Loss 0.7933 (0.7933)	InvT  19.87 ( 19.87)	Acc@1  87.60 ( 87.60)	Acc@3  96.00 ( 96.00)
+[2024-02-25 15:39:21,133 INFO] Epoch: [8][100/404]	Loss 0.8554 (1.011)	InvT  19.89 ( 19.88)	Acc@1  86.80 ( 83.38)	Acc@3  95.80 ( 94.13)
+[2024-02-25 15:40:43,733 INFO] Epoch: [8][200/404]	Loss 1.134 (1.021)	InvT  19.91 ( 19.89)	Acc@1  83.40 ( 83.16)	Acc@3  92.20 ( 94.09)
+[2024-02-25 15:42:07,312 INFO] Epoch: [8][300/404]	Loss 1.059 (1.036)	InvT  19.91 ( 19.90)	Acc@1  81.20 ( 82.94)	Acc@3  94.60 ( 93.97)
+[2024-02-25 15:43:30,654 INFO] Epoch: [8][400/404]	Loss 1.002 (1.044)	InvT  19.91 ( 19.90)	Acc@1  84.20 ( 82.84)	Acc@3  95.00 ( 93.91)
+[2024-02-25 15:43:33,241 INFO] Learning rate: 2.173294728774589e-05
+[2024-02-25 15:43:36,009 INFO] Epoch 8, valid metric: {"Acc@1": 38.534, "Acc@3": 49.941, "loss": 4.19}
+[2024-02-25 15:43:38,302 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch3.mdl
+[2024-02-25 15:43:40,095 INFO] Epoch: [9][  0/404]	Loss 0.8769 (0.8769)	InvT  19.91 ( 19.91)	Acc@1  85.00 ( 85.00)	Acc@3  93.60 ( 93.60)
+[2024-02-25 15:45:02,266 INFO] Epoch: [9][100/404]	Loss 0.7173 (0.8855)	InvT  19.94 ( 19.93)	Acc@1  89.00 ( 85.06)	Acc@3  96.00 ( 95.40)
+[2024-02-25 15:46:24,327 INFO] Epoch: [9][200/404]	Loss 0.9642 (0.9075)	InvT  19.96 ( 19.94)	Acc@1  84.20 ( 84.85)	Acc@3  95.00 ( 95.25)
+[2024-02-25 15:47:46,470 INFO] Epoch: [9][300/404]	Loss 0.8471 (0.9157)	InvT  19.97 ( 19.95)	Acc@1  85.80 ( 84.74)	Acc@3  96.20 ( 95.16)
+[2024-02-25 15:49:08,606 INFO] Epoch: [9][400/404]	Loss 1.062 (0.9218)	InvT  19.98 ( 19.95)	Acc@1  82.80 ( 84.69)	Acc@3  94.00 ( 95.15)
+[2024-02-25 15:49:11,172 INFO] Learning rate: 2.0700843055437284e-05
+[2024-02-25 15:49:13,959 INFO] Epoch 9, valid metric: {"Acc@1": 38.299, "Acc@3": 48.974, "loss": 4.119}
+[2024-02-25 15:49:16,364 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch4.mdl
+[2024-02-25 15:49:18,206 INFO] Epoch: [10][  0/404]	Loss 0.6544 (0.6544)	InvT  19.98 ( 19.98)	Acc@1  89.00 ( 89.00)	Acc@3  96.60 ( 96.60)
+[2024-02-25 15:50:40,009 INFO] Epoch: [10][100/404]	Loss 0.7663 (0.7727)	InvT  20.02 ( 20.00)	Acc@1  86.40 ( 86.93)	Acc@3  95.20 ( 96.47)
+[2024-02-25 15:52:01,919 INFO] Epoch: [10][200/404]	Loss 0.7951 (0.7814)	InvT  20.04 ( 20.02)	Acc@1  86.40 ( 86.67)	Acc@3  96.40 ( 96.39)
+[2024-02-25 15:53:23,807 INFO] Epoch: [10][300/404]	Loss 0.7378 (0.7964)	InvT  20.06 ( 20.03)	Acc@1  87.40 ( 86.47)	Acc@3  96.00 ( 96.29)
+[2024-02-25 15:54:45,918 INFO] Epoch: [10][400/404]	Loss 0.8315 (0.8058)	InvT  20.07 ( 20.04)	Acc@1  85.00 ( 86.37)	Acc@3  96.20 ( 96.22)
+[2024-02-25 15:54:48,496 INFO] Learning rate: 1.9668738823128672e-05
+[2024-02-25 15:54:51,288 INFO] Epoch 10, valid metric: {"Acc@1": 38.358, "Acc@3": 49.091, "loss": 4.276}
+[2024-02-25 15:54:53,546 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch5.mdl
+[2024-02-25 15:54:55,436 INFO] Epoch: [11][  0/404]	Loss 0.6853 (0.6853)	InvT  20.07 ( 20.07)	Acc@1  88.40 ( 88.40)	Acc@3  98.40 ( 98.40)
+[2024-02-25 15:56:17,536 INFO] Epoch: [11][100/404]	Loss 0.7549 (0.6671)	InvT  20.11 ( 20.09)	Acc@1  86.80 ( 88.40)	Acc@3  97.20 ( 97.37)
+[2024-02-25 15:57:40,067 INFO] Epoch: [11][200/404]	Loss 0.7499 (0.6827)	InvT  20.14 ( 20.11)	Acc@1  86.00 ( 88.25)	Acc@3  97.60 ( 97.25)
+[2024-02-25 15:59:01,954 INFO] Epoch: [11][300/404]	Loss 0.7401 (0.6959)	InvT  20.16 ( 20.12)	Acc@1  87.40 ( 88.06)	Acc@3  97.60 ( 97.15)
+[2024-02-25 16:00:24,034 INFO] Epoch: [11][400/404]	Loss 0.742 (0.7062)	InvT  20.17 ( 20.13)	Acc@1  86.40 ( 87.90)	Acc@3  96.60 ( 97.05)
+[2024-02-25 16:00:26,629 INFO] Learning rate: 1.8636634590820063e-05
+[2024-02-25 16:00:29,366 INFO] Epoch 11, valid metric: {"Acc@1": 36.686, "Acc@3": 48.035, "loss": 4.425}
+[2024-02-25 16:00:31,724 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch6.mdl
+[2024-02-25 16:00:33,528 INFO] Epoch: [12][  0/404]	Loss 0.4695 (0.4695)	InvT  20.18 ( 20.18)	Acc@1  93.00 ( 93.00)	Acc@3  98.40 ( 98.40)
+[2024-02-25 16:01:55,564 INFO] Epoch: [12][100/404]	Loss 0.7311 (0.5811)	InvT  20.21 ( 20.19)	Acc@1  86.60 ( 89.85)	Acc@3  97.00 ( 97.96)
+[2024-02-25 16:03:17,408 INFO] Epoch: [12][200/404]	Loss 0.4895 (0.5955)	InvT  20.24 ( 20.21)	Acc@1  91.80 ( 89.65)	Acc@3  98.00 ( 97.91)
+[2024-02-25 16:04:39,424 INFO] Epoch: [12][300/404]	Loss 0.6256 (0.6033)	InvT  20.27 ( 20.23)	Acc@1  89.20 ( 89.57)	Acc@3  97.60 ( 97.87)
+[2024-02-25 16:06:01,609 INFO] Epoch: [12][400/404]	Loss 0.7332 (0.6141)	InvT  20.29 ( 20.24)	Acc@1  87.20 ( 89.42)	Acc@3  96.20 ( 97.76)
+[2024-02-25 16:06:04,219 INFO] Learning rate: 1.7604530358511455e-05
+[2024-02-25 16:06:07,000 INFO] Epoch 12, valid metric: {"Acc@1": 37.654, "Acc@3": 48.211, "loss": 4.757}
+[2024-02-25 16:06:09,343 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch7.mdl
+[2024-02-25 16:06:11,188 INFO] Epoch: [13][  0/404]	Loss 0.5426 (0.5426)	InvT  20.29 ( 20.29)	Acc@1  90.00 ( 90.00)	Acc@3  98.20 ( 98.20)
+[2024-02-25 16:07:33,233 INFO] Epoch: [13][100/404]	Loss 0.615 (0.5215)	InvT  20.32 ( 20.31)	Acc@1  89.40 ( 90.92)	Acc@3  98.40 ( 98.43)
+[2024-02-25 16:08:55,253 INFO] Epoch: [13][200/404]	Loss 0.7075 (0.5296)	InvT  20.36 ( 20.32)	Acc@1  87.80 ( 90.75)	Acc@3  96.60 ( 98.37)
+[2024-02-25 16:10:17,555 INFO] Epoch: [13][300/404]	Loss 0.6748 (0.5379)	InvT  20.38 ( 20.34)	Acc@1  87.80 ( 90.63)	Acc@3  96.60 ( 98.31)
+[2024-02-25 16:11:39,963 INFO] Epoch: [13][400/404]	Loss 0.5839 (0.5448)	InvT  20.40 ( 20.35)	Acc@1  89.00 ( 90.55)	Acc@3  99.00 ( 98.24)
+[2024-02-25 16:11:42,567 INFO] Learning rate: 1.6572426126202846e-05
+[2024-02-25 16:11:45,348 INFO] Epoch 13, valid metric: {"Acc@1": 36.158, "Acc@3": 46.54, "loss": 4.799}
+[2024-02-25 16:11:47,661 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch8.mdl
+[2024-02-25 16:11:49,541 INFO] Epoch: [14][  0/404]	Loss 0.3482 (0.3482)	InvT  20.40 ( 20.40)	Acc@1  94.00 ( 94.00)	Acc@3  99.60 ( 99.60)
+[2024-02-25 16:13:11,934 INFO] Epoch: [14][100/404]	Loss 0.43 (0.4488)	InvT  20.44 ( 20.42)	Acc@1  92.00 ( 92.23)	Acc@3  99.00 ( 98.97)
+[2024-02-25 16:14:34,658 INFO] Epoch: [14][200/404]	Loss 0.5075 (0.4601)	InvT  20.47 ( 20.44)	Acc@1  90.00 ( 91.97)	Acc@3  99.00 ( 98.88)
+[2024-02-25 16:15:57,092 INFO] Epoch: [14][300/404]	Loss 0.4297 (0.4699)	InvT  20.49 ( 20.45)	Acc@1  92.80 ( 91.76)	Acc@3  99.20 ( 98.82)
+[2024-02-25 16:17:19,453 INFO] Epoch: [14][400/404]	Loss 0.5295 (0.481)	InvT  20.51 ( 20.47)	Acc@1  91.00 ( 91.57)	Acc@3  98.60 ( 98.74)
+[2024-02-25 16:17:22,018 INFO] Learning rate: 1.5540321893894234e-05
+[2024-02-25 16:17:24,735 INFO] Epoch 14, valid metric: {"Acc@1": 35.836, "Acc@3": 47.595, "loss": 4.918}
+[2024-02-25 16:17:27,022 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch9.mdl
+[2024-02-25 16:17:28,972 INFO] Epoch: [15][  0/404]	Loss 0.473 (0.473)	InvT  20.52 ( 20.52)	Acc@1  91.00 ( 91.00)	Acc@3  98.60 ( 98.60)
+[2024-02-25 16:18:51,216 INFO] Epoch: [15][100/404]	Loss 0.4217 (0.4013)	InvT  20.55 ( 20.53)	Acc@1  93.40 ( 92.86)	Acc@3  99.00 ( 99.14)
+[2024-02-25 16:20:13,575 INFO] Epoch: [15][200/404]	Loss 0.3651 (0.4136)	InvT  20.58 ( 20.55)	Acc@1  93.80 ( 92.63)	Acc@3  98.80 ( 99.05)
+[2024-02-25 16:21:36,188 INFO] Epoch: [15][300/404]	Loss 0.4941 (0.4236)	InvT  20.60 ( 20.56)	Acc@1  92.00 ( 92.50)	Acc@3  99.00 ( 99.03)
+[2024-02-25 16:22:58,854 INFO] Epoch: [15][400/404]	Loss 0.471 (0.4289)	InvT  20.62 ( 20.57)	Acc@1  91.20 ( 92.42)	Acc@3  99.00 ( 99.01)
+[2024-02-25 16:23:01,410 INFO] Learning rate: 1.4508217661585627e-05
+[2024-02-25 16:23:04,078 INFO] Epoch 15, valid metric: {"Acc@1": 36.217, "Acc@3": 47.185, "loss": 4.951}
+[2024-02-25 16:23:06,560 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch10.mdl
+[2024-02-25 16:23:08,427 INFO] Epoch: [16][  0/404]	Loss 0.3409 (0.3409)	InvT  20.62 ( 20.62)	Acc@1  93.40 ( 93.40)	Acc@3  99.60 ( 99.60)
+[2024-02-25 16:24:30,486 INFO] Epoch: [16][100/404]	Loss 0.4161 (0.3655)	InvT  20.65 ( 20.64)	Acc@1  92.80 ( 93.49)	Acc@3  98.80 ( 99.31)
+[2024-02-25 16:25:52,456 INFO] Epoch: [16][200/404]	Loss 0.3347 (0.3764)	InvT  20.68 ( 20.65)	Acc@1  92.60 ( 93.31)	Acc@3  99.60 ( 99.25)
+[2024-02-25 16:27:14,380 INFO] Epoch: [16][300/404]	Loss 0.4627 (0.3814)	InvT  20.70 ( 20.66)	Acc@1  91.60 ( 93.19)	Acc@3  98.20 ( 99.22)
+[2024-02-25 16:28:36,308 INFO] Epoch: [16][400/404]	Loss 0.4679 (0.3841)	InvT  20.72 ( 20.68)	Acc@1  91.40 ( 93.19)	Acc@3  99.40 ( 99.22)
+[2024-02-25 16:28:38,871 INFO] Learning rate: 1.3476113429277016e-05
+[2024-02-25 16:28:41,580 INFO] Epoch 16, valid metric: {"Acc@1": 36.1, "Acc@3": 46.716, "loss": 5.074}
+[2024-02-25 16:28:43,898 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch11.mdl
+[2024-02-25 16:28:45,763 INFO] Epoch: [17][  0/404]	Loss 0.3578 (0.3578)	InvT  20.72 ( 20.72)	Acc@1  93.20 ( 93.20)	Acc@3  99.60 ( 99.60)
+[2024-02-25 16:30:07,803 INFO] Epoch: [17][100/404]	Loss 0.279 (0.3272)	InvT  20.75 ( 20.74)	Acc@1  95.00 ( 94.19)	Acc@3  99.60 ( 99.50)
+[2024-02-25 16:31:29,814 INFO] Epoch: [17][200/404]	Loss 0.3793 (0.3366)	InvT  20.77 ( 20.75)	Acc@1  92.80 ( 94.02)	Acc@3  99.80 ( 99.44)
+[2024-02-25 16:32:51,972 INFO] Epoch: [17][300/404]	Loss 0.3686 (0.3418)	InvT  20.80 ( 20.76)	Acc@1  93.00 ( 93.93)	Acc@3  99.20 ( 99.42)
+[2024-02-25 16:34:14,201 INFO] Epoch: [17][400/404]	Loss 0.2786 (0.3467)	InvT  20.82 ( 20.77)	Acc@1  94.80 ( 93.84)	Acc@3  99.40 ( 99.39)
+[2024-02-25 16:34:16,739 INFO] Learning rate: 1.2444009196968407e-05
+[2024-02-25 16:34:19,405 INFO] Epoch 17, valid metric: {"Acc@1": 36.745, "Acc@3": 47.273, "loss": 5.179}
+[2024-02-25 16:34:21,671 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch12.mdl
+[2024-02-25 16:34:23,362 INFO] Epoch: [18][  0/404]	Loss 0.3512 (0.3512)	InvT  20.82 ( 20.82)	Acc@1  94.40 ( 94.40)	Acc@3  99.80 ( 99.80)
+[2024-02-25 16:35:45,862 INFO] Epoch: [18][100/404]	Loss 0.3661 (0.3103)	InvT  20.84 ( 20.83)	Acc@1  92.80 ( 94.43)	Acc@3  99.40 ( 99.58)
+[2024-02-25 16:37:08,630 INFO] Epoch: [18][200/404]	Loss 0.2829 (0.3092)	InvT  20.86 ( 20.84)	Acc@1  94.60 ( 94.44)	Acc@3  99.60 ( 99.56)
+[2024-02-25 16:38:31,205 INFO] Epoch: [18][300/404]	Loss 0.3253 (0.3146)	InvT  20.88 ( 20.85)	Acc@1  94.60 ( 94.37)	Acc@3  99.40 ( 99.52)
+[2024-02-25 16:39:53,284 INFO] Epoch: [18][400/404]	Loss 0.3673 (0.3174)	InvT  20.90 ( 20.86)	Acc@1  93.40 ( 94.31)	Acc@3  98.60 ( 99.50)
+[2024-02-25 16:39:55,841 INFO] Learning rate: 1.1411904964659799e-05
+[2024-02-25 16:39:58,497 INFO] Epoch 18, valid metric: {"Acc@1": 35.073, "Acc@3": 46.393, "loss": 5.293}
+[2024-02-25 16:40:00,870 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch13.mdl
+[2024-02-25 16:40:02,592 INFO] Epoch: [19][  0/404]	Loss 0.2179 (0.2179)	InvT  20.90 ( 20.90)	Acc@1  96.20 ( 96.20)	Acc@3 100.00 (100.00)
+[2024-02-25 16:41:24,601 INFO] Epoch: [19][100/404]	Loss 0.2895 (0.2731)	InvT  20.92 ( 20.91)	Acc@1  93.80 ( 95.06)	Acc@3  99.60 ( 99.70)
+[2024-02-25 16:42:47,470 INFO] Epoch: [19][200/404]	Loss 0.2487 (0.2785)	InvT  20.94 ( 20.92)	Acc@1  95.20 ( 95.04)	Acc@3  99.20 ( 99.68)
+[2024-02-25 16:44:10,227 INFO] Epoch: [19][300/404]	Loss 0.3378 (0.282)	InvT  20.96 ( 20.93)	Acc@1  93.60 ( 94.96)	Acc@3  99.40 ( 99.66)
+[2024-02-25 16:45:32,888 INFO] Epoch: [19][400/404]	Loss 0.3229 (0.2869)	InvT  20.98 ( 20.94)	Acc@1  93.00 ( 94.88)	Acc@3 100.00 ( 99.64)
+[2024-02-25 16:45:35,442 INFO] Learning rate: 1.0379800732351188e-05
+[2024-02-25 16:45:38,133 INFO] Epoch 19, valid metric: {"Acc@1": 36.305, "Acc@3": 47.126, "loss": 5.481}
+[2024-02-25 16:45:40,461 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch14.mdl
+[2024-02-25 16:45:42,271 INFO] Epoch: [20][  0/404]	Loss 0.3106 (0.3106)	InvT  20.98 ( 20.98)	Acc@1  94.80 ( 94.80)	Acc@3 100.00 (100.00)
+[2024-02-25 16:47:04,755 INFO] Epoch: [20][100/404]	Loss 0.2523 (0.2624)	InvT  21.00 ( 20.99)	Acc@1  95.20 ( 95.33)	Acc@3  99.80 ( 99.73)
+[2024-02-25 16:48:27,295 INFO] Epoch: [20][200/404]	Loss 0.2963 (0.2633)	InvT  21.02 ( 21.00)	Acc@1  94.60 ( 95.30)	Acc@3  99.20 ( 99.72)
+[2024-02-25 16:49:49,365 INFO] Epoch: [20][300/404]	Loss 0.3531 (0.2672)	InvT  21.04 ( 21.01)	Acc@1  94.00 ( 95.20)	Acc@3  99.20 ( 99.70)
+[2024-02-25 16:51:11,733 INFO] Epoch: [20][400/404]	Loss 0.2637 (0.2682)	InvT  21.05 ( 21.02)	Acc@1  94.40 ( 95.20)	Acc@3  99.60 ( 99.69)
+[2024-02-25 16:51:14,343 INFO] Learning rate: 9.34769650004258e-06
+[2024-02-25 16:51:17,081 INFO] Epoch 20, valid metric: {"Acc@1": 36.041, "Acc@3": 46.481, "loss": 5.438}
+[2024-02-25 16:51:19,434 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch15.mdl
+[2024-02-25 16:51:21,196 INFO] Epoch: [21][  0/404]	Loss 0.2452 (0.2452)	InvT  21.05 ( 21.05)	Acc@1  95.20 ( 95.20)	Acc@3 100.00 (100.00)
+[2024-02-25 16:52:43,243 INFO] Epoch: [21][100/404]	Loss 0.1899 (0.2382)	InvT  21.07 ( 21.06)	Acc@1  97.40 ( 95.82)	Acc@3  99.80 ( 99.78)
+[2024-02-25 16:54:05,334 INFO] Epoch: [21][200/404]	Loss 0.2895 (0.242)	InvT  21.09 ( 21.07)	Acc@1  94.20 ( 95.71)	Acc@3  99.40 ( 99.77)
+[2024-02-25 16:55:27,450 INFO] Epoch: [21][300/404]	Loss 0.1826 (0.2449)	InvT  21.10 ( 21.08)	Acc@1  97.00 ( 95.64)	Acc@3 100.00 ( 99.76)
+[2024-02-25 16:56:49,625 INFO] Epoch: [21][400/404]	Loss 0.2146 (0.2478)	InvT  21.12 ( 21.09)	Acc@1  96.60 ( 95.57)	Acc@3  99.60 ( 99.75)
+[2024-02-25 16:56:52,227 INFO] Learning rate: 8.31559226773397e-06
+[2024-02-25 16:56:54,962 INFO] Epoch 21, valid metric: {"Acc@1": 35.689, "Acc@3": 46.452, "loss": 5.628}
+[2024-02-25 16:56:57,223 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch16.mdl
+[2024-02-25 16:56:58,995 INFO] Epoch: [22][  0/404]	Loss 0.1839 (0.1839)	InvT  21.12 ( 21.12)	Acc@1  97.40 ( 97.40)	Acc@3  99.40 ( 99.40)
+[2024-02-25 16:58:21,474 INFO] Epoch: [22][100/404]	Loss 0.2296 (0.229)	InvT  21.13 ( 21.13)	Acc@1  96.20 ( 95.82)	Acc@3  99.80 ( 99.81)
+[2024-02-25 16:59:44,428 INFO] Epoch: [22][200/404]	Loss 0.2197 (0.2283)	InvT  21.15 ( 21.13)	Acc@1  96.20 ( 95.89)	Acc@3  99.60 ( 99.80)
+[2024-02-25 17:01:06,650 INFO] Epoch: [22][300/404]	Loss 0.1885 (0.229)	InvT  21.16 ( 21.14)	Acc@1  96.60 ( 95.91)	Acc@3  99.40 ( 99.80)
+[2024-02-25 17:02:28,763 INFO] Epoch: [22][400/404]	Loss 0.2303 (0.2307)	InvT  21.18 ( 21.15)	Acc@1  95.80 ( 95.89)	Acc@3 100.00 ( 99.80)
+[2024-02-25 17:02:31,348 INFO] Learning rate: 7.283488035425359e-06
+[2024-02-25 17:02:34,097 INFO] Epoch 22, valid metric: {"Acc@1": 36.041, "Acc@3": 46.334, "loss": 5.703}
+[2024-02-25 17:02:36,384 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch17.mdl
+[2024-02-25 17:02:38,212 INFO] Epoch: [23][  0/404]	Loss 0.1649 (0.1649)	InvT  21.18 ( 21.18)	Acc@1  97.40 ( 97.40)	Acc@3 100.00 (100.00)
+[2024-02-25 17:04:00,317 INFO] Epoch: [23][100/404]	Loss 0.255 (0.2097)	InvT  21.19 ( 21.18)	Acc@1  95.80 ( 96.33)	Acc@3  99.80 ( 99.84)
+[2024-02-25 17:05:22,351 INFO] Epoch: [23][200/404]	Loss 0.2034 (0.2078)	InvT  21.20 ( 21.19)	Acc@1  96.40 ( 96.35)	Acc@3  99.60 ( 99.85)
+[2024-02-25 17:06:44,288 INFO] Epoch: [23][300/404]	Loss 0.2456 (0.2099)	InvT  21.22 ( 21.20)	Acc@1  95.20 ( 96.31)	Acc@3 100.00 ( 99.85)
+[2024-02-25 17:08:06,741 INFO] Epoch: [23][400/404]	Loss 0.152 (0.2118)	InvT  21.23 ( 21.20)	Acc@1  97.20 ( 96.26)	Acc@3 100.00 ( 99.84)
+[2024-02-25 17:08:09,385 INFO] Learning rate: 6.2513838031167506e-06
+[2024-02-25 17:08:12,128 INFO] Epoch 23, valid metric: {"Acc@1": 35.103, "Acc@3": 45.865, "loss": 5.621}
+[2024-02-25 17:08:14,398 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch18.mdl
+[2024-02-25 17:08:16,241 INFO] Epoch: [24][  0/404]	Loss 0.171 (0.171)	InvT  21.23 ( 21.23)	Acc@1  96.80 ( 96.80)	Acc@3 100.00 (100.00)
+[2024-02-25 17:09:38,575 INFO] Epoch: [24][100/404]	Loss 0.1727 (0.196)	InvT  21.24 ( 21.23)	Acc@1  97.00 ( 96.51)	Acc@3 100.00 ( 99.89)
+[2024-02-25 17:11:00,792 INFO] Epoch: [24][200/404]	Loss 0.1602 (0.1961)	InvT  21.25 ( 21.24)	Acc@1  96.80 ( 96.54)	Acc@3 100.00 ( 99.89)
+[2024-02-25 17:12:22,862 INFO] Epoch: [24][300/404]	Loss 0.1649 (0.1992)	InvT  21.26 ( 21.25)	Acc@1  97.80 ( 96.51)	Acc@3  99.80 ( 99.87)
+[2024-02-25 17:13:45,300 INFO] Epoch: [24][400/404]	Loss 0.178 (0.2018)	InvT  21.27 ( 21.25)	Acc@1  96.20 ( 96.44)	Acc@3 100.00 ( 99.86)
+[2024-02-25 17:13:47,908 INFO] Learning rate: 5.219279570808141e-06
+[2024-02-25 17:13:50,592 INFO] Epoch 24, valid metric: {"Acc@1": 35.513, "Acc@3": 46.305, "loss": 5.674}
+[2024-02-25 17:13:52,903 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch19.mdl
+[2024-02-25 17:13:54,717 INFO] Epoch: [25][  0/404]	Loss 0.1733 (0.1733)	InvT  21.27 ( 21.27)	Acc@1  97.00 ( 97.00)	Acc@3 100.00 (100.00)
+[2024-02-25 17:15:16,839 INFO] Epoch: [25][100/404]	Loss 0.2439 (0.1931)	InvT  21.28 ( 21.27)	Acc@1  95.80 ( 96.58)	Acc@3 100.00 ( 99.88)
+[2024-02-25 17:16:39,741 INFO] Epoch: [25][200/404]	Loss 0.1915 (0.1947)	InvT  21.29 ( 21.28)	Acc@1  95.80 ( 96.51)	Acc@3 100.00 ( 99.88)
+[2024-02-25 17:18:02,464 INFO] Epoch: [25][300/404]	Loss 0.2307 (0.1944)	InvT  21.30 ( 21.28)	Acc@1  95.20 ( 96.50)	Acc@3  99.80 ( 99.87)
+[2024-02-25 17:19:25,023 INFO] Epoch: [25][400/404]	Loss 0.2597 (0.1951)	InvT  21.30 ( 21.29)	Acc@1  96.60 ( 96.50)	Acc@3  99.80 ( 99.88)
+[2024-02-25 17:19:27,533 INFO] Learning rate: 4.187175338499531e-06
+[2024-02-25 17:19:30,219 INFO] Epoch 25, valid metric: {"Acc@1": 35.689, "Acc@3": 46.041, "loss": 5.718}
+[2024-02-25 17:19:32,524 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch20.mdl
+[2024-02-25 17:19:34,249 INFO] Epoch: [26][  0/404]	Loss 0.1508 (0.1508)	InvT  21.30 ( 21.30)	Acc@1  96.20 ( 96.20)	Acc@3  99.80 ( 99.80)
+[2024-02-25 17:20:56,451 INFO] Epoch: [26][100/404]	Loss 0.1868 (0.1807)	InvT  21.31 ( 21.31)	Acc@1  97.80 ( 96.81)	Acc@3  99.60 ( 99.90)
+[2024-02-25 17:22:18,534 INFO] Epoch: [26][200/404]	Loss 0.2123 (0.1804)	InvT  21.32 ( 21.31)	Acc@1  96.60 ( 96.82)	Acc@3  99.80 ( 99.91)
+[2024-02-25 17:23:40,336 INFO] Epoch: [26][300/404]	Loss 0.2032 (0.1811)	InvT  21.33 ( 21.32)	Acc@1  96.20 ( 96.82)	Acc@3 100.00 ( 99.91)
+[2024-02-25 17:25:02,290 INFO] Epoch: [26][400/404]	Loss 0.1888 (0.1809)	InvT  21.33 ( 21.32)	Acc@1  96.20 ( 96.82)	Acc@3 100.00 ( 99.90)
+[2024-02-25 17:25:04,832 INFO] Learning rate: 3.155071106190922e-06
+[2024-02-25 17:25:07,548 INFO] Epoch 26, valid metric: {"Acc@1": 35.22, "Acc@3": 45.484, "loss": 5.731}
+[2024-02-25 17:25:09,874 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch21.mdl
+[2024-02-25 17:25:11,681 INFO] Epoch: [27][  0/404]	Loss 0.1822 (0.1822)	InvT  21.33 ( 21.33)	Acc@1  96.60 ( 96.60)	Acc@3  99.80 ( 99.80)
+[2024-02-25 17:26:34,111 INFO] Epoch: [27][100/404]	Loss 0.1994 (0.1739)	InvT  21.34 ( 21.34)	Acc@1  97.20 ( 96.93)	Acc@3 100.00 ( 99.91)
+[2024-02-25 17:27:56,563 INFO] Epoch: [27][200/404]	Loss 0.238 (0.175)	InvT  21.34 ( 21.34)	Acc@1  94.60 ( 96.85)	Acc@3  99.80 ( 99.92)
+[2024-02-25 17:29:18,831 INFO] Epoch: [27][300/404]	Loss 0.191 (0.1758)	InvT  21.35 ( 21.34)	Acc@1  96.40 ( 96.85)	Acc@3 100.00 ( 99.91)
+[2024-02-25 17:30:40,765 INFO] Epoch: [27][400/404]	Loss 0.1653 (0.1749)	InvT  21.35 ( 21.34)	Acc@1  97.40 ( 96.86)	Acc@3  99.80 ( 99.92)
+[2024-02-25 17:30:43,353 INFO] Learning rate: 2.122966873882313e-06
+[2024-02-25 17:30:46,098 INFO] Epoch 27, valid metric: {"Acc@1": 35.572, "Acc@3": 46.1, "loss": 5.708}
+[2024-02-25 17:30:48,462 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch22.mdl
+[2024-02-25 17:30:50,336 INFO] Epoch: [28][  0/404]	Loss 0.1586 (0.1586)	InvT  21.35 ( 21.35)	Acc@1  97.80 ( 97.80)	Acc@3 100.00 (100.00)
+[2024-02-25 17:32:12,287 INFO] Epoch: [28][100/404]	Loss 0.1128 (0.1655)	InvT  21.36 ( 21.35)	Acc@1  98.40 ( 97.00)	Acc@3 100.00 ( 99.94)
+[2024-02-25 17:33:34,306 INFO] Epoch: [28][200/404]	Loss 0.1446 (0.1649)	InvT  21.36 ( 21.36)	Acc@1  97.80 ( 97.09)	Acc@3  99.80 ( 99.94)
+[2024-02-25 17:34:56,526 INFO] Epoch: [28][300/404]	Loss 0.1111 (0.1652)	InvT  21.36 ( 21.36)	Acc@1  97.80 ( 97.08)	Acc@3 100.00 ( 99.94)
+[2024-02-25 17:36:19,047 INFO] Epoch: [28][400/404]	Loss 0.137 (0.1666)	InvT  21.36 ( 21.36)	Acc@1  97.20 ( 97.06)	Acc@3 100.00 ( 99.94)
+[2024-02-25 17:36:21,608 INFO] Learning rate: 1.0908626415737036e-06
+[2024-02-25 17:36:24,294 INFO] Epoch 28, valid metric: {"Acc@1": 35.308, "Acc@3": 45.982, "loss": 5.743}
+[2024-02-25 17:36:26,822 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch23.mdl
+[2024-02-25 17:36:28,633 INFO] Epoch: [29][  0/404]	Loss 0.1613 (0.1613)	InvT  21.36 ( 21.36)	Acc@1  97.60 ( 97.60)	Acc@3 100.00 (100.00)
+[2024-02-25 17:37:51,160 INFO] Epoch: [29][100/404]	Loss 0.158 (0.1609)	InvT  21.37 ( 21.37)	Acc@1  97.00 ( 97.23)	Acc@3  99.60 ( 99.96)
+[2024-02-25 17:39:13,484 INFO] Epoch: [29][200/404]	Loss 0.09357 (0.1624)	InvT  21.37 ( 21.37)	Acc@1  98.60 ( 97.15)	Acc@3 100.00 ( 99.95)
+[2024-02-25 17:40:35,449 INFO] Epoch: [29][300/404]	Loss 0.1897 (0.1633)	InvT  21.37 ( 21.37)	Acc@1  97.00 ( 97.14)	Acc@3  99.80 ( 99.94)
+[2024-02-25 17:41:57,449 INFO] Epoch: [29][400/404]	Loss 0.2201 (0.1618)	InvT  21.37 ( 21.37)	Acc@1  96.60 ( 97.15)	Acc@3 100.00 ( 99.94)
+[2024-02-25 17:42:00,023 INFO] Learning rate: 5.875840926509409e-08
+[2024-02-25 17:42:02,741 INFO] Epoch 29, valid metric: {"Acc@1": 34.927, "Acc@3": 46.012, "loss": 5.79}
+[2024-02-25 17:42:05,360 INFO] Delete old checkpoint /home/lrl23/PReSA/checkpoint/humans_wikidata_ind_2024-02-25-1452.47/checkpoint_epoch24.mdl
